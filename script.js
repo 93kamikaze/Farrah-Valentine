@@ -1,27 +1,38 @@
-// Replace your existing createBees function with this:
-function createBees() {
-    // Increased count to 12 for better variety
-    for (let i = 0; i < 12; i++) {
-        let bee = document.createElement('div');
-        bee.className = 'bee';
-        bee.innerText = '🐝';
-        
-        // Randomize Vertical Position
-        bee.style.top = Math.random() * 100 + 'vh';
-        
-        // Randomize Timing
-        bee.style.animationDelay = (Math.random() * 15) + 's';
-        bee.style.animationDuration = (8 + Math.random() * 10) + 's';
-        
-        // --- ADD VARIOUS SIZES HERE ---
-        // This generates a random size between 15px and 50px
-        const randomSize = Math.floor(Math.random() * 35) + 15;
-        bee.style.fontSize = `${randomSize}px`;
-        
-        // Slight opacity variation for depth
-        bee.style.opacity = Math.random() * 0.5 + 0.5; 
+const noBtn = document.getElementById('noButton');
 
-        document.body.appendChild(bee);
-    }
+// Function to move the button to a random spot
+function moveButton() {
+    // Calculate bounds so the button doesn't go off-screen
+    const padding = 20;
+    const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+    const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+    
+    const randomX = Math.floor(Math.random() * maxX);
+    const randomY = Math.floor(Math.random() * maxY);
+    
+    noBtn.style.position = 'fixed';
+    noBtn.style.left = `${randomX}px`;
+    noBtn.style.top = `${randomY}px`;
 }
-createBees();
+
+// "Run Away" Logic: Detects proximity
+window.addEventListener('mousemove', (e) => {
+    const btnRect = noBtn.getBoundingClientRect();
+    
+    // Calculate the center of the button
+    const btnCenterX = btnRect.left + btnRect.width / 2;
+    const btnCenterY = btnRect.top + btnRect.height / 2;
+    
+    // Calculate distance between cursor and button center
+    const distance = Math.sqrt(
+        Math.pow(e.clientX - btnCenterX, 2) + 
+        Math.pow(e.clientY - btnCenterY, 2)
+    );
+
+    // If the cursor is closer than 100 pixels, move the button
+    if (distance < 100) {
+        moveButton();
+    }
+});
+
+// Keep your existing createBees() and yesBtn listener here
