@@ -4,9 +4,27 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ffdde1;
+    background-color: #FFDE59; /* Bright Yellow */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     overflow: hidden;
+    position: relative;
+}
+
+/* Floating Bees Background */
+.bee {
+    position: absolute;
+    font-size: 2rem;
+    z-index: 0;
+    pointer-events: none; /* So they don't block the buttons */
+    animation: fly 10s linear infinite;
+}
+
+@keyframes fly {
+    0% { transform: translate(0, 0) rotate(0deg); left: -50px; top: 20%; }
+    25% { transform: translate(100px, 50px) rotate(10deg); }
+    50% { transform: translate(200px, -50px) rotate(-10deg); }
+    75% { transform: translate(300px, 20px) rotate(5deg); }
+    100% { transform: translate(110vw, 0) rotate(0deg); left: 100%; }
 }
 
 .container {
@@ -15,6 +33,8 @@ body {
     padding: 40px;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    z-index: 10;
+    position: relative;
 }
 
 img {
@@ -23,36 +43,35 @@ img {
 }
 
 h1 {
-    color: #d63384;
+    color: #5C4033; /* Dark brown for a "bee" feel */
     margin-bottom: 30px;
 }
 
 .buttons {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    height: 50px;
-    position: relative;
+    align-items: center;
+    gap: 40px; /* Space between buttons */
+    min-height: 60px;
 }
 
 button {
-    padding: 10px 25px;
-    font-size: 1.1rem;
-    border-radius: 8px;
+    padding: 12px 28px;
+    font-size: 1.2rem;
+    border-radius: 12px;
     border: none;
     cursor: pointer;
     font-weight: bold;
-    transition: transform 0.1s ease;
+    transition: transform 0.2s ease;
 }
 
 #yesButton {
-    background-color: #4CAF50;
-    color: white;
-    z-index: 10;
+    background-color: #FFBD59; /* Orange-yellow */
+    color: #5C4033;
 }
 
 #noButton {
-    background-color: #f44336;
+    background-color: #5C4033;
     color: white;
-    position: absolute; /* Needed for the runaway effect */
+    /* Removed absolute from here to start it in the flexbox */
 }
