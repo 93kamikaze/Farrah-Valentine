@@ -1,20 +1,77 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* Yellow and Beige Stripes */
+    background: repeating-linear-gradient(
+        45deg,
+        #FFDE59,
+        #FFDE59 30px,
+        #F5F5DC 30px,
+        #F5F5DC 60px
+    );
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+/* Party Lights Effect */
+.party-mode {
+    animation: partyLights 0.3s infinite;
+}
+
+@keyframes partyLights {
+    0% { background-color: #ff0000; }
+    20% { background-color: #00ff00; }
+    40% { background-color: #0000ff; }
+    60% { background-color: #ffff00; }
+    80% { background-color: #ff00ff; }
+    100% { background-color: #00ffff; }
+}
+
+.container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+    padding: 50px;
+    border-radius: 30px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    z-index: 10;
+    max-width: 90%;
+}
+
+img {
+    width: 220px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+}
+
+h1 {
+    color: #5C4033;
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
 .buttons {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 30px;
-    min-height: 100px; /* Extra space for the No button to reset */
+    min-height: 80px;
 }
 
 button {
     padding: 15px 35px;
-    font-size: 1.3rem;
-    border-radius: 50px; /* Rounded pill shape */
+    font-size: 1.2rem;
+    border-radius: 50px;
     border: none;
     cursor: pointer;
     font-weight: bold;
-    transition: all 0.3s ease;
-    box-shadow: 0 6px 0px rgba(0,0,0,0.1); /* 3D depth */
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 #yesButton {
@@ -23,14 +80,25 @@ button {
 }
 
 #yesButton:hover {
-    transform: translateY(-5px) scale(1.1);
+    transform: scale(1.1);
     background-color: #ffcc7d;
-    box-shadow: 0 10px 20px rgba(255, 189, 89, 0.4);
 }
 
 #noButton {
     background-color: #5C4033;
     color: white;
-    position: relative; /* Necessary for the movement logic */
-    transition: left 0.2s ease, top 0.2s ease; /* Smooth sliding */
+    position: relative; /* Essential for the runner logic */
+}
+
+/* Bee sizes and animation */
+.bee {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+    animation: fly 10s linear infinite;
+}
+
+@keyframes fly {
+    0% { transform: translateX(-100px); left: 0; }
+    100% { transform: translateX(110vw); left: 0; }
 }
