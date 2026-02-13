@@ -1,35 +1,36 @@
-body {
-    margin: 0;
-    height: 100vh;
+.buttons {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Yellow and Beige Stripes */
-    background: repeating-linear-gradient(
-        45deg,
-        #FFDE59,
-        #FFDE59 40px,
-        #FFF4C2 40px,
-        #FFF4C2 80px
-    );
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    overflow: hidden;
-    position: relative;
+    gap: 30px;
+    min-height: 100px; /* Extra space for the No button to reset */
 }
 
-/* Updated Bee styling */
-.bee {
-    position: absolute;
-    z-index: 0;
-    pointer-events: none;
-    animation: fly 12s linear infinite;
-    /* Allow the JS to set the base font-size */
+button {
+    padding: 15px 35px;
+    font-size: 1.3rem;
+    border-radius: 50px; /* Rounded pill shape */
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 0px rgba(0,0,0,0.1); /* 3D depth */
 }
 
-@keyframes fly {
-    0% { transform: translateX(-10vw) translateY(0) rotate(0deg); }
-    25% { transform: translateX(25vw) translateY(-50px) rotate(10deg); }
-    50% { transform: translateX(50vw) translateY(50px) rotate(-10deg); }
-    75% { transform: translateX(75vw) translateY(-20px) rotate(5deg); }
-    100% { transform: translateX(110vw) translateY(0) rotate(0deg); }
+#yesButton {
+    background-color: #FFBD59;
+    color: #5C4033;
+}
+
+#yesButton:hover {
+    transform: translateY(-5px) scale(1.1);
+    background-color: #ffcc7d;
+    box-shadow: 0 10px 20px rgba(255, 189, 89, 0.4);
+}
+
+#noButton {
+    background-color: #5C4033;
+    color: white;
+    position: relative; /* Necessary for the movement logic */
+    transition: left 0.2s ease, top 0.2s ease; /* Smooth sliding */
 }
