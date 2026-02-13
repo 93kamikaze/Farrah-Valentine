@@ -1,37 +1,35 @@
 const noBtn = document.getElementById('noButton');
 const yesBtn = document.getElementById('yesButton');
-const question = document.getElementById('question');
-const mainContent = document.getElementById('main-content');
 
-let yesScale = 1;
-
-// The Runaway Logic
+// 1. Logic to make the "No" button run away
 noBtn.addEventListener('mouseover', () => {
-    // Calculate random position within the viewport
+    // Get random coordinates
     const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
     const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
     
+    // Apply position
+    noBtn.style.position = 'fixed'; // Breaks it out of the container to move anywhere
     noBtn.style.left = `${x}px`;
     noBtn.style.top = `${y}px`;
-    noBtn.style.position = 'fixed';
-
-    // Make the Yes button grow every time she tries to click No
-    yesScale += 0.15;
-    yesBtn.style.transform = `scale(${yesScale})`;
 });
 
-// The Success Logic
-yesBtn.addEventListener('click', () => {
-    // 1. Confetti explosion
-    confetti({
-        particleCount: 150,
-        spread: 70,
-        origin: { y: 0.6 }
-    });
+// 2. Add floating bees to the background automatically
+function createBees() {
+    for (let i = 0; i < 8; i++) {
+        let bee = document.createElement('div');
+        bee.className = 'bee';
+        bee.innerText = '🐝';
+        bee.style.top = Math.random() * 100 + 'vh';
+        bee.style.animationDelay = (Math.random() * 10) + 's';
+        bee.style.fontSize = (Math.random() * 20 + 20) + 'px';
+        document.body.appendChild(bee);
+    }
+}
+createBees();
 
-    // 2. Change the content
-    question.innerHTML = "Yay! See you on the 14th! 🌹";
-    noBtn.style.display = 'none';
-    yesBtn.innerHTML = "I'm so excited!";
-    yesBtn.style.transform = "scale(1)";
+// 3. Success Message
+yesBtn.addEventListener('click', () => {
+    document.getElementById('question').innerHTML = "Un-bee-lievable! See you on the 14th! 🐝❤️";
+    document.querySelector('.buttons').style.display = 'none';
+    confetti();
 });
